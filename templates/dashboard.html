@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Dashboard</h2>
+
+<div class="row mt-3">
+    <div class="col-md-4 mb-3">
+        <div class="card text-bg-primary">
+            <div class="card-body text-center">
+                <h6 class="card-title">Total Students</h6>
+                <h1>{{ total }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card text-bg-success">
+            <div class="card-body text-center">
+                <h6 class="card-title">Fees Paid</h6>
+                <h1>{{ paid }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card text-bg-danger">
+            <div class="card-body text-center">
+                <h6 class="card-title">Fees Pending</h6>
+                <h1>{{ unpaid }}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="mt-4">Students with pending fees</h4>
+<table class="table table-bordered table-striped mt-2">
+    <thead class="table-dark">
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in unpaid_students %}
+        <tr>
+            <td>{{ s["roll_no"] }}</td>
+            <td>{{ s["name"] }}</td>
+            <td>{{ s["course"] }}</td>
+            <td>{{ s["phone"] }}</td>
+            <td><a href="/edit/{{ s['id'] }}" class="btn btn-sm btn-warning">Mark as paid</a></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="text-center">Everyone has paid. 🎉</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

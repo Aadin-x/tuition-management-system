@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>All Students</h2>
+
+<table class="table table-bordered table-striped mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Fee</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in students %}
+        <tr>
+            <td>{{ s["roll_no"] }}</td>
+            <td>{{ s["name"] }}</td>
+            <td>{{ s["course"] }}</td>
+            <td>{{ s["phone"] }}</td>
+            <td>{{ s["email"] }}</td>
+            <td>
+                {% if s["fee_paid"] %}
+                    <span class="badge bg-success">Paid</span>
+                {% else %}
+                    <span class="badge bg-danger">Not Paid</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="text-center">No students yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
